@@ -68,7 +68,14 @@ namespace EasyConrtolClient
                                     process.StartInfo.RedirectStandardError = true;
                                     process.Start();
                                     string strOuput = process.StandardOutput.ReadToEnd();
-                                    if (strOuput == "") { strOuput = process.StandardError.ReadToEnd(); }
+                                    if (strOuput == "") 
+                                    {
+                                        strOuput = process.StandardError.ReadToEnd();
+                                        if (strOuput == "")
+                                        {
+                                            strOuput = "无回显...";
+                                        }
+                                    }
                                     request = Encoding.Default.GetBytes(strOuput);
                                     stm.Write(request, 0, request.Length);
                                     process.WaitForExit();
