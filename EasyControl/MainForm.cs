@@ -42,6 +42,7 @@ namespace EasyControl
             // 
             this.ClientSize = new System.Drawing.Size(719, 486);
             this.Name = "MainForm";
+            this.Text = "屏幕监控";
             this.ResumeLayout(false);
 
         }
