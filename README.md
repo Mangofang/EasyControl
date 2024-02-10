@@ -32,12 +32,12 @@
   1. 公开仓库
 
 ## 可能的更新
-1.目标键盘记录
-2.目标语音记录
-3.获取摄像头
-4.Chrome存储数据获取
-5.代码优化
-6.多机器控制
+1. 目标键盘记录
+2. 目标语音记录
+3. 获取摄像头
+4. Chrome存储数据获取
+5. 群控支持
+6. 代码优化
 
 <p align="center"">
   <img src="https://github.com/Mangofang/EasyControl/blob/master/image/cc9272d3-9afc-47cf-a2e4-75b05e141324.gif">
